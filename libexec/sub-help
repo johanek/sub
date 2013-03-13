@@ -9,15 +9,13 @@ print_summaries() {
 
   for command in $(sub-commands); do
     local file="$(command_path "$command")"
-    if [ ! -h "$file" ]; then
-      local summary="$(summary "$file")"
-      if [ -n "$summary" ]; then
-        commands["${#commands[@]}"]="$command"
-        summaries["${#summaries[@]}"]="$summary"
+    local summary="$(summary "$file")"
+    if [ -n "$summary" ]; then
+      commands["${#commands[@]}"]="$command"
+      summaries["${#summaries[@]}"]="$summary"
 
-        if [ "${#command}" -gt "$longest_command" ]; then
-          longest_command="${#command}"
-        fi
+      if [ "${#command}" -gt "$longest_command" ]; then
+        longest_command="${#command}"
       fi
     fi
   done
